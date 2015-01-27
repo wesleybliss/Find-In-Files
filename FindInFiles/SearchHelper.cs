@@ -26,6 +26,25 @@ namespace FindInFiles {
         }
 
         /// <summary>
+        /// Searches for <paramref name="query"/> inside each file in <paramref name="files"/>
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static List<FileMatch> searchFiles( List<string> files, string query ) {
+            List<FileMatch> matches = new List<FileMatch>();
+            foreach ( string file in files ) {
+                List<FileMatch> fms = searchFile( file, query );
+                if ( fms != null ) {
+                    foreach ( FileMatch fm in fms ) {
+                        matches.Add( fm );
+                    }
+                }
+            }
+            return matches;
+        }
+
+        /// <summary>
         /// Searches within a file for <paramref name="query"/> text
         /// </summary>
         /// <param name="file"></param>
@@ -39,7 +58,7 @@ namespace FindInFiles {
             // @todo LinQ might be faster than manually looping here
             //      https://msdn.microsoft.com/en-us/library/dd383503(v=vs.110).aspx
             query = query.ToLower();
-            int lineIndex = 0;
+            int lineIndex = 1;
 
             foreach ( string line in File.ReadLines( file ) ) {
 
@@ -49,7 +68,7 @@ namespace FindInFiles {
                         Path.GetFileNameWithoutExtension( file ),
                         lineIndex, line.IndexOf( query ), file,
                         getLineSample( line, query )
-                    ));
+                    ) );
 
                 }
 
@@ -73,33 +92,14 @@ namespace FindInFiles {
         /// <returns></returns>
         public static string getLineSample( string line, string query ) {
             int snippetLength = settingsHelper.getSettingDefault(
-                SettingsHelper.KEY_SNIPPER_LENGTH, 10
+                SettingsHelper.KEY_SNIPPET_LENGTH, 10
             );
 
             int x = line.IndexOf( query ) - snippetLength;
-            int y = ( query.Length + (snippetLength * 2) );
+            int y = ( query.Length + ( snippetLength * 2 ) );
             if ( x < 0 ) x = 0;
-            if ( (x + y) > line.Length - 1 ) y = ( line.Length - x );
+            if ( ( x + y ) > line.Length - 1 ) y = ( line.Length - x );
             return line.Substring( x, y );
-        }
-
-        /// <summary>
-        /// Searches for <paramref name="query"/> inside each file in <paramref name="files"/>
-        /// </summary>
-        /// <param name="files"></param>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public static List<FileMatch> searchFiles( List<string> files, string query ) {
-            List<FileMatch> matches = new List<FileMatch>();
-            foreach ( string file in files ) {
-                List<FileMatch> fms = searchFile( file, query );
-                if ( fms != null ) {
-                    foreach ( FileMatch fm in fms ) {
-                        matches.Add( fm );
-                    }
-                }
-            }
-            return matches;
         }
 
     } // class

@@ -12,10 +12,18 @@ namespace FindInFiles {
         private static string APP_DATA_NAME = "FindInFiles";
 
         // Keys for accessing properties array (System)
-        public static string KEY_SNIPPER_LENGTH = "SnippetLength";
+        public static string KEY_SNIPPET_LENGTH = "SnippetLength";
+        public static string KEY_WINDOW_WIDTH = "WindowWidth";
+        public static string KEY_WINDOW_HEIGHT = "WindowHeight";
+        public static string KEY_WINDOW_POS_X = "WindowPosX";
+        public static string KEY_WINDOW_POS_Y = "WindowPosY";
 
         // Default values for some settings
         public static int DEFAULT_SNIPPET_LENGTH = 10;
+        public static int DEFAULT_WINDOW_WIDTH = 863;
+        public static int DEFAULT_WINDOW_HEIGHT = 761;
+        public static int DEFAULT_WINDOW_POS_X = 20;
+        public static int DEFAULT_WINDOW_POS_Y = 20;
 
         public bool setSettingDefault( string key, int value ) {
             try {

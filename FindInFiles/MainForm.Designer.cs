@@ -29,6 +29,11 @@
             this.textQuery = new System.Windows.Forms.TextBox();
             this.buttonRun = new System.Windows.Forms.Button();
             this.textPath = new System.Windows.Forms.TextBox();
+            this.menuMain = new System.Windows.Forms.MenuStrip();
+            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFileSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.listMatches = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -39,11 +44,9 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuListMatchesCopyFull = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuListMatchesCopyFilename = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuListMatchesExcludeFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuListMatchesShowOnlyFile = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,8 +55,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.menuMain.SuspendLayout();
             this.contextMenuListMatches.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -67,7 +70,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Panel1.Controls.Add(this.menuStrip1);
+            this.splitContainer1.Panel1.Controls.Add(this.menuMain);
             // 
             // splitContainer1.Panel2
             // 
@@ -134,6 +137,46 @@
             this.textPath.TabIndex = 1;
             this.textPath.Text = "C:\\Users\\wes\\AndroidStudioProjects\\jackthreads-android\\src";
             // 
+            // menuMain
+            // 
+            this.menuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFile});
+            this.menuMain.Location = new System.Drawing.Point(0, 0);
+            this.menuMain.Name = "menuMain";
+            this.menuMain.Size = new System.Drawing.Size(855, 28);
+            this.menuMain.TabIndex = 1;
+            this.menuMain.Text = "menuStrip1";
+            // 
+            // menuFile
+            // 
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFileSettings,
+            this.toolStripMenuItem2,
+            this.menuFileExit});
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(42, 24);
+            this.menuFile.Text = "&File";
+            // 
+            // menuFileSettings
+            // 
+            this.menuFileSettings.Name = "menuFileSettings";
+            this.menuFileSettings.Size = new System.Drawing.Size(130, 24);
+            this.menuFileSettings.Text = "&Settings";
+            this.menuFileSettings.Click += new System.EventHandler(this.menuFileSettings_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 6);
+            // 
+            // menuFileExit
+            // 
+            this.menuFileExit.Name = "menuFileExit";
+            this.menuFileExit.Size = new System.Drawing.Size(130, 24);
+            this.menuFileExit.Text = "E&xit";
+            this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
+            // 
             // listMatches
             // 
             this.listMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -142,6 +185,7 @@
             this.columnHeader3});
             this.listMatches.ContextMenuStrip = this.contextMenuListMatches;
             this.listMatches.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listMatches.FullRowSelect = true;
             this.listMatches.GridLines = true;
             this.listMatches.HideSelection = false;
@@ -157,7 +201,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 187;
+            this.columnHeader1.Width = 261;
             // 
             // columnHeader2
             // 
@@ -177,9 +221,12 @@
             this.contextMenuListMatchesOpenSecondary,
             this.toolStripMenuItem1,
             this.contextMenuListMatchesCopyFull,
-            this.contextMenuListMatchesCopyFilename});
+            this.contextMenuListMatchesCopyFilename,
+            this.toolStripMenuItem3,
+            this.contextMenuListMatchesExcludeFile,
+            this.contextMenuListMatchesShowOnlyFile});
             this.contextMenuListMatches.Name = "contextMenuListMatches";
-            this.contextMenuListMatches.Size = new System.Drawing.Size(247, 106);
+            this.contextMenuListMatches.Size = new System.Drawing.Size(247, 160);
             // 
             // contextMenuListMatchesOpenAS
             // 
@@ -203,52 +250,32 @@
             this.contextMenuListMatchesCopyFull.Name = "contextMenuListMatchesCopyFull";
             this.contextMenuListMatchesCopyFull.Size = new System.Drawing.Size(246, 24);
             this.contextMenuListMatchesCopyFull.Text = "&Copy Full Path";
+            this.contextMenuListMatchesCopyFull.Click += new System.EventHandler(this.contextMenuListMatchesCopyFull_Click);
             // 
             // contextMenuListMatchesCopyFilename
             // 
             this.contextMenuListMatchesCopyFilename.Name = "contextMenuListMatchesCopyFilename";
             this.contextMenuListMatchesCopyFilename.Size = new System.Drawing.Size(246, 24);
             this.contextMenuListMatchesCopyFilename.Text = "Copy &File Name";
+            this.contextMenuListMatchesCopyFilename.Click += new System.EventHandler(this.contextMenuListMatchesCopyFilename_Click);
             // 
-            // menuStrip1
+            // toolStripMenuItem3
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuFile});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(855, 28);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(243, 6);
             // 
-            // menuFile
+            // contextMenuListMatchesExcludeFile
             // 
-            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuFileSettings,
-            this.toolStripMenuItem2,
-            this.menuFileExit});
-            this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(42, 24);
-            this.menuFile.Text = "&File";
+            this.contextMenuListMatchesExcludeFile.Name = "contextMenuListMatchesExcludeFile";
+            this.contextMenuListMatchesExcludeFile.Size = new System.Drawing.Size(246, 24);
+            this.contextMenuListMatchesExcludeFile.Text = "E&xclude This File";
+            this.contextMenuListMatchesExcludeFile.Click += new System.EventHandler(this.contextMenuListMatchesExcludeFile_Click);
             // 
-            // menuFileSettings
+            // contextMenuListMatchesShowOnlyFile
             // 
-            this.menuFileSettings.Name = "menuFileSettings";
-            this.menuFileSettings.Size = new System.Drawing.Size(175, 24);
-            this.menuFileSettings.Text = "&Settings";
-            this.menuFileSettings.Click += new System.EventHandler(this.menuFileSettings_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
-            // 
-            // menuFileExit
-            // 
-            this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.Size = new System.Drawing.Size(175, 24);
-            this.menuFileExit.Text = "E&xit";
-            this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
+            this.contextMenuListMatchesShowOnlyFile.Name = "contextMenuListMatchesShowOnlyFile";
+            this.contextMenuListMatchesShowOnlyFile.Size = new System.Drawing.Size(246, 24);
+            this.contextMenuListMatchesShowOnlyFile.Text = "&Show Only This File";
             // 
             // MainForm
             // 
@@ -257,10 +284,11 @@
             this.ClientSize = new System.Drawing.Size(855, 724);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuMain;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Find In Files";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -273,9 +301,9 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.menuMain.ResumeLayout(false);
+            this.menuMain.PerformLayout();
             this.contextMenuListMatches.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -297,11 +325,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesCopyFull;
         private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesCopyFilename;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuFileSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuFileExit;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesExcludeFile;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesShowOnlyFile;
     }
 }
 

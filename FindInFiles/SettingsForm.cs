@@ -21,13 +21,13 @@ namespace FindInFiles {
 
         private void SettingsForm_Load( object sender, EventArgs e ) {
             textSnippetSize.Text = settingsHelper.getSettingDefault(
-                SettingsHelper.KEY_SNIPPER_LENGTH, 10
+                SettingsHelper.KEY_SNIPPET_LENGTH, 10
             ).ToString();
         }
 
         private void buttonSave_Click( object sender, EventArgs e ) {
             settingsHelper.setSettingDefault(
-                SettingsHelper.KEY_SNIPPER_LENGTH,
+                SettingsHelper.KEY_SNIPPET_LENGTH,
                 Int32.Parse( textSnippetSize.Text )
             );
             this.Close();
