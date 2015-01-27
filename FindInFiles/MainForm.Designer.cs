@@ -33,22 +33,24 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuListMatchesExcludeFile = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuListMatchesShowOnlyFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.listMatches = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelHeader = new System.Windows.Forms.Panel();
+            this.panelBody = new System.Windows.Forms.Panel();
+            this.listMatches = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRun = new System.Windows.Forms.Button();
             this.textPath = new System.Windows.Forms.TextBox();
             this.textQuery = new System.Windows.Forms.TextBox();
             this.contextMenuListMatches.SuspendLayout();
             this.menuMain.SuspendLayout();
-            this.panelHeader.SuspendLayout();
+            this.panelBody.SuspendLayout();
+            this.tableLayoutMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuListMatches
@@ -115,41 +117,6 @@
             this.contextMenuListMatchesShowOnlyFile.Size = new System.Drawing.Size(246, 24);
             this.contextMenuListMatchesShowOnlyFile.Text = "&Show Only This File";
             // 
-            // listMatches
-            // 
-            this.listMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listMatches.ContextMenuStrip = this.contextMenuListMatches;
-            this.listMatches.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listMatches.FullRowSelect = true;
-            this.listMatches.GridLines = true;
-            this.listMatches.HideSelection = false;
-            this.listMatches.Location = new System.Drawing.Point(0, 65);
-            this.listMatches.MultiSelect = false;
-            this.listMatches.Name = "listMatches";
-            this.listMatches.Size = new System.Drawing.Size(855, 659);
-            this.listMatches.TabIndex = 2;
-            this.listMatches.UseCompatibleStateImageBehavior = false;
-            this.listMatches.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 261;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Line";
-            this.columnHeader2.Width = 71;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Sample";
-            this.columnHeader3.Width = 573;
-            // 
             // menuMain
             // 
             this.menuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -158,7 +125,7 @@
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
             this.menuMain.Size = new System.Drawing.Size(855, 28);
-            this.menuMain.TabIndex = 4;
+            this.menuMain.TabIndex = 6;
             this.menuMain.Text = "menuStrip1";
             // 
             // menuFile
@@ -188,57 +155,123 @@
             this.menuFileExit.Size = new System.Drawing.Size(130, 24);
             this.menuFileExit.Text = "E&xit";
             // 
-            // panelHeader
+            // panelBody
             // 
-            this.panelHeader.Controls.Add(this.buttonRun);
-            this.panelHeader.Controls.Add(this.textPath);
-            this.panelHeader.Controls.Add(this.textQuery);
-            this.panelHeader.Location = new System.Drawing.Point(0, 31);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(855, 29);
-            this.panelHeader.TabIndex = 5;
+            this.panelBody.Controls.Add(this.listMatches);
+            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBody.Location = new System.Drawing.Point(0, 76);
+            this.panelBody.Name = "panelBody";
+            this.panelBody.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.panelBody.Size = new System.Drawing.Size(855, 648);
+            this.panelBody.TabIndex = 7;
+            // 
+            // listMatches
+            // 
+            this.listMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listMatches.ContextMenuStrip = this.contextMenuListMatches;
+            this.listMatches.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listMatches.FullRowSelect = true;
+            this.listMatches.GridLines = true;
+            this.listMatches.HideSelection = false;
+            this.listMatches.Location = new System.Drawing.Point(10, 0);
+            this.listMatches.MultiSelect = false;
+            this.listMatches.Name = "listMatches";
+            this.listMatches.Size = new System.Drawing.Size(835, 638);
+            this.listMatches.TabIndex = 3;
+            this.listMatches.UseCompatibleStateImageBehavior = false;
+            this.listMatches.View = System.Windows.Forms.View.Details;
+            this.listMatches.DoubleClick += new System.EventHandler(this.listMatches_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 261;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Line";
+            this.columnHeader2.Width = 71;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Sample";
+            this.columnHeader3.Width = 573;
+            // 
+            // tableLayoutMain
+            // 
+            this.tableLayoutMain.AutoSize = true;
+            this.tableLayoutMain.ColumnCount = 3;
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.5614F));
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.32164F));
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutMain.Controls.Add(this.buttonRun, 0, 0);
+            this.tableLayoutMain.Controls.Add(this.textPath, 0, 0);
+            this.tableLayoutMain.Controls.Add(this.textQuery, 0, 0);
+            this.tableLayoutMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutMain.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutMain.Name = "tableLayoutMain";
+            this.tableLayoutMain.RowCount = 1;
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutMain.Size = new System.Drawing.Size(855, 48);
+            this.tableLayoutMain.TabIndex = 9;
             // 
             // buttonRun
             // 
-            this.buttonRun.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRun.Location = new System.Drawing.Point(731, 0);
+            this.buttonRun.Location = new System.Drawing.Point(693, 10);
+            this.buttonRun.Margin = new System.Windows.Forms.Padding(10);
             this.buttonRun.Name = "buttonRun";
-            this.buttonRun.Size = new System.Drawing.Size(124, 29);
-            this.buttonRun.TabIndex = 3;
+            this.buttonRun.Size = new System.Drawing.Size(152, 28);
+            this.buttonRun.TabIndex = 4;
             this.buttonRun.Text = "Search";
             this.buttonRun.UseVisualStyleBackColor = true;
+            this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
             // 
             // textPath
             // 
-            this.textPath.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textPath.AcceptsReturn = true;
+            this.textPath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textPath.Location = new System.Drawing.Point(218, 0);
-            this.textPath.Margin = new System.Windows.Forms.Padding(4);
+            this.textPath.HideSelection = false;
+            this.textPath.Location = new System.Drawing.Point(220, 10);
+            this.textPath.Margin = new System.Windows.Forms.Padding(10);
             this.textPath.Name = "textPath";
-            this.textPath.Size = new System.Drawing.Size(485, 27);
-            this.textPath.TabIndex = 2;
+            this.textPath.Size = new System.Drawing.Size(453, 27);
+            this.textPath.TabIndex = 3;
             this.textPath.Text = "C:\\Users\\wes\\AndroidStudioProjects\\jackthreads-android\\src";
             // 
             // textQuery
             // 
-            this.textQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textQuery.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textQuery.Location = new System.Drawing.Point(0, 0);
-            this.textQuery.Margin = new System.Windows.Forms.Padding(4);
+            this.textQuery.Location = new System.Drawing.Point(10, 10);
+            this.textQuery.Margin = new System.Windows.Forms.Padding(10);
             this.textQuery.Name = "textQuery";
-            this.textQuery.Size = new System.Drawing.Size(218, 27);
-            this.textQuery.TabIndex = 1;
+            this.textQuery.Size = new System.Drawing.Size(190, 27);
+            this.textQuery.TabIndex = 2;
             this.textQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuery_KeyDown);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(855, 724);
-            this.Controls.Add(this.panelHeader);
+            this.Controls.Add(this.panelBody);
+            this.Controls.Add(this.tableLayoutMain);
             this.Controls.Add(this.menuMain);
-            this.Controls.Add(this.listMatches);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
@@ -248,8 +281,9 @@
             this.contextMenuListMatches.ResumeLayout(false);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
+            this.panelBody.ResumeLayout(false);
+            this.tableLayoutMain.ResumeLayout(false);
+            this.tableLayoutMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,16 +300,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesExcludeFile;
         private System.Windows.Forms.ToolStripMenuItem contextMenuListMatchesShowOnlyFile;
-        private System.Windows.Forms.ListView listMatches;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuFileSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem menuFileExit;
-        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.ListView listMatches;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutMain;
         private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.TextBox textPath;
         private System.Windows.Forms.TextBox textQuery;
