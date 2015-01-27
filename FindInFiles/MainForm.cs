@@ -23,6 +23,7 @@ namespace FindInFiles {
 
     public partial class MainForm : Form {
 
+        // @todo Move these to settings dialog
         public static readonly string ANDROID_STUDIO_TITLE = "*Android Studio*";
         public static readonly string ANDROID_STUDIO_EXECUTABLE =
             @"C:\Program Files\Android\Android Studio\bin\studio64.exe";
@@ -39,6 +40,9 @@ namespace FindInFiles {
             settingsHelper = new SettingsHelper();
         }
 
+        /// <summary>
+        /// Retrieves relevant settings and performs any necessary pre-layout for the window.
+        /// </summary>
         private void MainForm_Load( object sender, EventArgs e ) {
 
             // Set window size based on memory, if available
@@ -71,6 +75,9 @@ namespace FindInFiles {
 
         }
 
+        /// <summary>
+        /// Handles button click to execute the search routine.
+        /// </summary>
         private void buttonRun_Click( object sender, EventArgs e ) {
 
             List<string> files = SearchHelper
@@ -94,6 +101,12 @@ namespace FindInFiles {
 
         }
 
+        /// <summary>
+        /// Retrieves a match (FileMatch) at a specified index.
+        /// Matches' indices correspond to the indices of the listbox.
+        /// </summary>
+        /// <param name="listIndex">The indice to look for.</param>
+        /// <returns>Null if no match found at the specified indice.</returns>
         private FileMatch getMatchAt( int listIndex ) {
             if ( (listMatches.Items.Count - 1) < listIndex ) return null;
             return matches[listIndex];
@@ -175,6 +188,9 @@ namespace FindInFiles {
             }
         }
 
+        /// <summary>
+        /// Handles key events in the query text box.
+        /// </summary>
         private void textQuery_KeyDown( object sender, KeyEventArgs e ) {
             if ( e.KeyCode.Equals( Keys.Enter ) ) {
                 e.Handled = true;
@@ -182,14 +198,23 @@ namespace FindInFiles {
             }
         }
 
+        /// <summary>
+        /// Show the settings dialog when the menu is clicked.
+        /// </summary>
         private void menuFileSettings_Click( object sender, EventArgs e ) {
             ( new SettingsForm() ).ShowDialog( this );
         }
 
+        /// <summary>
+        /// Exit the application when the menu is clicked.
+        /// </summary>
         private void menuFileExit_Click( object sender, EventArgs e ) {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Copies the full path of the match when the context menu is clicked.
+        /// </summary>
         private void contextMenuListMatchesCopyFull_Click( object sender, EventArgs e ) {
             FileMatch match = getSelectedMatch();
             if ( match != null ) {
@@ -198,6 +223,9 @@ namespace FindInFiles {
             }
         }
 
+        /// <summary>
+        /// Copies just the filename of the match when the context menu is clicked.
+        /// </summary>
         private void contextMenuListMatchesCopyFilename_Click( object sender, EventArgs e ) {
             FileMatch match = getSelectedMatch();
             if ( match != null ) {
@@ -206,6 +234,10 @@ namespace FindInFiles {
             }
         }
 
+        /// <summary>
+        /// Allows limited filtering of results by letting the user exclude a particular
+        /// file from the result set. The list is locked while updating.
+        /// </summary>
         private void contextMenuListMatchesExcludeFile_Click( object sender, EventArgs e ) {
 
             FileMatch selectedMatch = getSelectedMatch();
@@ -221,6 +253,9 @@ namespace FindInFiles {
 
         }
 
+        /// <summary>
+        /// Captures the window closing event and saves any relevant settings before exiting.
+        /// </summary>
         private void MainForm_FormClosing( object sender, FormClosingEventArgs e ) {
 
             // Save window size
