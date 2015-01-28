@@ -73,6 +73,20 @@ namespace FindInFiles {
 
             this.Location = new Point( windowPosX, windowPosY );
 
+            // Set last query, if available
+            bool showLastQuery = settingsHelper.getSettingDefault(
+                SettingsHelper.KEY_REMEMBER_LAST_QUERY,
+                SettingsHelper.DEFAULT_REMEMBER_LAST_QUERY
+            );
+            if ( showLastQuery ) {
+                textQuery.Text = settingsHelper.getSettingDefault(
+                    SettingsHelper.KEY_LAST_QUERY,
+                    SettingsHelper.DEFAULT_LAST_QUERY
+                );
+            }
+
+            this.ActiveControl = textQuery;
+
         }
 
         /// <summary>

@@ -82,5 +82,29 @@ namespace FindInFiles.Properties {
                 this["WindowPosY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastQuery {
+            get {
+                return ((string)(this["LastQuery"]));
+            }
+            set {
+                this["LastQuery"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RememberLastQuery {
+            get {
+                return ((bool)(this["RememberLastQuery"]));
+            }
+            set {
+                this["RememberLastQuery"] = value;
+            }
+        }
     }
 }

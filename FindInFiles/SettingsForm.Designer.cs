@@ -26,6 +26,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textSnippetSize = new FindInFiles.NumericTextBox();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.checkRememberLastQuery = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,11 +58,25 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // checkRememberLastQuery
+            // 
+            this.checkRememberLastQuery.AutoSize = true;
+            this.checkRememberLastQuery.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkRememberLastQuery.Checked = true;
+            this.checkRememberLastQuery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkRememberLastQuery.Location = new System.Drawing.Point(16, 48);
+            this.checkRememberLastQuery.Name = "checkRememberLastQuery";
+            this.checkRememberLastQuery.Size = new System.Drawing.Size(173, 21);
+            this.checkRememberLastQuery.TabIndex = 4;
+            this.checkRememberLastQuery.Text = "Remember last query?";
+            this.checkRememberLastQuery.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(302, 176);
+            this.Controls.Add(this.checkRememberLastQuery);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textSnippetSize);
             this.Controls.Add(this.label1);
@@ -78,5 +93,6 @@
         private System.Windows.Forms.Label label1;
         private NumericTextBox textSnippetSize;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.CheckBox checkRememberLastQuery;
     }
 }

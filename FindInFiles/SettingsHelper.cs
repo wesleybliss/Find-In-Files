@@ -17,6 +17,8 @@ namespace FindInFiles {
         public static string KEY_WINDOW_HEIGHT = "WindowHeight";
         public static string KEY_WINDOW_POS_X = "WindowPosX";
         public static string KEY_WINDOW_POS_Y = "WindowPosY";
+        public static string KEY_LAST_QUERY = "LastQuery";
+        public static string KEY_REMEMBER_LAST_QUERY = "RememberLastQuery";
 
         // Default values for some settings
         public static int DEFAULT_SNIPPET_LENGTH = 10;
@@ -24,6 +26,8 @@ namespace FindInFiles {
         public static int DEFAULT_WINDOW_HEIGHT = 761;
         public static int DEFAULT_WINDOW_POS_X = 20;
         public static int DEFAULT_WINDOW_POS_Y = 20;
+        public static string DEFAULT_LAST_QUERY = "";
+        public static bool DEFAULT_REMEMBER_LAST_QUERY = true;
 
         public bool setSettingDefault( string key, int value ) {
             try {

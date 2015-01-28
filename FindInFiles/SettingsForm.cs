@@ -26,11 +26,19 @@ namespace FindInFiles {
         }
 
         private void buttonSave_Click( object sender, EventArgs e ) {
+
             settingsHelper.setSettingDefault(
                 SettingsHelper.KEY_SNIPPET_LENGTH,
                 Int32.Parse( textSnippetSize.Text )
             );
+
+            settingsHelper.setSettingDefault(
+                SettingsHelper.KEY_REMEMBER_LAST_QUERY,
+                checkRememberLastQuery.Checked
+            );
+
             this.Close();
+
         }
 
     }
