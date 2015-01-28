@@ -102,6 +102,36 @@ namespace FindInFiles {
             return line.Substring( x, y );
         }
 
+        /// <summary>
+        /// Groups a list of FileMatch objects by their filename.
+        /// </summary>
+        /// <param name="matches">A list of FileMatch objects.</param>
+        /// <returns>The same input matches, but grouped by filename.</returns>
+        public static Dictionary<string, List<FileMatch>> groupMatches( List<FileMatch> matches ) {
+            
+            Dictionary<string, List<FileMatch>> groups = new Dictionary<string, List<FileMatch>>();
+
+            foreach ( FileMatch match in matches ) {
+
+                List<FileMatch> groupList;
+
+                // Add the group/key if it doesn't exist yet
+                if ( !groups.ContainsKey( match.getName() ) ) {
+                    groupList = new List<FileMatch>();
+                    groups.Add( match.getName(), groupList );
+                }
+                else {
+                    groupList = groups[match.getName()];
+                }
+
+                groupList.Add( match );
+
+            }
+
+            return groups;
+
+        }
+
     } // class
 
 }

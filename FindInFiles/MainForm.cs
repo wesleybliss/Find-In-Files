@@ -32,7 +32,9 @@ namespace FindInFiles {
         private static extern bool SetForegroundWindow( IntPtr hWnd );
 
         private SettingsHelper settingsHelper;
+
         private List<FileMatch> matches;
+        private Dictionary<string, List<FileMatch>> groupedMatches;
 
 
         public MainForm() {
@@ -141,14 +143,48 @@ namespace FindInFiles {
         /// </summary>
         private void populateList() {
 
-            foreach ( FileMatch match in matches ) {
-                listMatches.Items.Add(
-                    getNewListItem(
+            //foreach ( FileMatch match in matches ) {
+            //    listMatches.Items.Add(
+            //        getNewListItem(
+            //            match.getName(),
+            //            match.getLine().ToString(),
+            //            match.getSample()
+            //        )
+            //    );
+            //}
+
+            foreach ( KeyValuePair<string, List<FileMatch>> group in groupedMatches ) {
+
+                // Start by assuming this is a new group
+                ListViewGroup currentGroup = null;
+
+                // Check if the group already exists
+                foreach ( ListViewGroup listGroup in listMatches.Groups ) {
+                    if ( listGroup.Header.Equals( group.Key ) ) {
+                        // Use the existing group
+                        currentGroup = listGroup;
+                        break;
+                    }
+                }
+
+                if ( currentGroup == null ) {
+                    currentGroup = new ListViewGroup( group.Key );
+                    listMatches.Groups.Add( currentGroup );
+                }
+
+                foreach ( FileMatch match in group.Value ) {
+
+                    ListViewItem lvi = getNewListItem(
                         match.getName(),
                         match.getLine().ToString(),
                         match.getSample()
-                    )
-                );
+                    );
+                    lvi.Group = currentGroup;
+
+                    listMatches.Items.Add( lvi );
+
+                }
+
             }
 
         }
@@ -313,7 +349,7 @@ namespace FindInFiles {
         /// @todo
         /// </summary>
         private void backgroundWorkerSearch_ProgressChanged( object sender, ProgressChangedEventArgs e ) {
-
+            
         }
 
         /// <summary>
@@ -329,6 +365,7 @@ namespace FindInFiles {
             }
 
             this.matches = matches;
+            this.groupedMatches = SearchHelper.groupMatches( matches );
 
             labelStatus.Text = "Ready";
 
