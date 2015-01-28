@@ -48,6 +48,9 @@
     <Compile Include="NumericTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PaddedListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

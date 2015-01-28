@@ -47,6 +47,8 @@
             this.buttonRun = new System.Windows.Forms.Button();
             this.textPath = new System.Windows.Forms.TextBox();
             this.textQuery = new System.Windows.Forms.TextBox();
+            this.paddedListView1 = new FindInFiles.PaddedListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuListMatches.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -157,6 +159,7 @@
             // 
             // panelBody
             // 
+            this.panelBody.Controls.Add(this.paddedListView1);
             this.panelBody.Controls.Add(this.listMatches);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBody.Location = new System.Drawing.Point(0, 76);
@@ -216,7 +219,7 @@
             this.tableLayoutMain.Name = "tableLayoutMain";
             this.tableLayoutMain.RowCount = 1;
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutMain.Size = new System.Drawing.Size(855, 48);
             this.tableLayoutMain.TabIndex = 9;
             // 
@@ -262,6 +265,23 @@
             this.textQuery.Size = new System.Drawing.Size(190, 27);
             this.textQuery.TabIndex = 2;
             this.textQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuery_KeyDown);
+            // 
+            // paddedListView1
+            // 
+            this.paddedListView1.BackColor = System.Drawing.SystemColors.Desktop;
+            this.paddedListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.paddedListView1.ItemPadding = ((short)(300));
+            this.paddedListView1.Location = new System.Drawing.Point(159, 53);
+            this.paddedListView1.Name = "paddedListView1";
+            this.paddedListView1.Size = new System.Drawing.Size(588, 398);
+            this.paddedListView1.TabIndex = 4;
+            this.paddedListView1.UseCompatibleStateImageBehavior = false;
+            this.paddedListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Width = 260;
             // 
             // MainForm
             // 
@@ -314,6 +334,8 @@
         private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.TextBox textPath;
         private System.Windows.Forms.TextBox textQuery;
+        private PaddedListView paddedListView1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 
