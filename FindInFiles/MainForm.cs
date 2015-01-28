@@ -73,17 +73,6 @@ namespace FindInFiles {
 
             this.Location = new Point( windowPosX, windowPosY );
 
-
-
-
-
-
-            for ( int i = 0; i < 10; i++ ) {
-                ListViewItem item = new ListViewItem( "Item #" + i.ToString() );
-                item.UseItemStyleForSubItems = true;
-                paddedListView1.Items.Add( new ListViewItem( "Item #" + i.ToString() ) );
-            }
-
         }
 
         /// <summary>

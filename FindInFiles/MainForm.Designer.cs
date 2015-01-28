@@ -23,8 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            this.contextMenuListMatches = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuListMatches = new System.Windows.Forms.ContextMenuStrip();
             this.contextMenuListMatchesOpenAS = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuListMatchesOpenSecondary = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -47,8 +46,6 @@
             this.buttonRun = new System.Windows.Forms.Button();
             this.textPath = new System.Windows.Forms.TextBox();
             this.textQuery = new System.Windows.Forms.TextBox();
-            this.paddedListView1 = new FindInFiles.PaddedListView();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuListMatches.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -159,7 +156,6 @@
             // 
             // panelBody
             // 
-            this.panelBody.Controls.Add(this.paddedListView1);
             this.panelBody.Controls.Add(this.listMatches);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBody.Location = new System.Drawing.Point(0, 76);
@@ -266,23 +262,6 @@
             this.textQuery.TabIndex = 2;
             this.textQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuery_KeyDown);
             // 
-            // paddedListView1
-            // 
-            this.paddedListView1.BackColor = System.Drawing.SystemColors.Desktop;
-            this.paddedListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.paddedListView1.ItemPadding = ((short)(300));
-            this.paddedListView1.Location = new System.Drawing.Point(159, 53);
-            this.paddedListView1.Name = "paddedListView1";
-            this.paddedListView1.Size = new System.Drawing.Size(588, 398);
-            this.paddedListView1.TabIndex = 4;
-            this.paddedListView1.UseCompatibleStateImageBehavior = false;
-            this.paddedListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Width = 260;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -334,8 +313,6 @@
         private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.TextBox textPath;
         private System.Windows.Forms.TextBox textQuery;
-        private PaddedListView paddedListView1;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 
