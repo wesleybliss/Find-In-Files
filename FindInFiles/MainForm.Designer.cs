@@ -49,6 +49,7 @@
             this.textQuery = new System.Windows.Forms.TextBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.labelCurrentOperation = new System.Windows.Forms.Label();
+            this.backgroundWorkerSearch = new System.ComponentModel.BackgroundWorker();
             this.contextMenuListMatches.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -274,10 +275,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatus.AutoSize = true;
             this.labelStatus.BackColor = System.Drawing.Color.Transparent;
-            this.labelStatus.Location = new System.Drawing.Point(3, 48);
+            this.labelStatus.Location = new System.Drawing.Point(7, 48);
+            this.labelStatus.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.labelStatus.Size = new System.Drawing.Size(204, 32);
+            this.labelStatus.Size = new System.Drawing.Size(200, 32);
             this.labelStatus.TabIndex = 4;
             this.labelStatus.Text = "Ready";
             // 
@@ -287,11 +289,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCurrentOperation.AutoSize = true;
-            this.labelCurrentOperation.Location = new System.Drawing.Point(213, 48);
+            this.labelCurrentOperation.Location = new System.Drawing.Point(217, 48);
+            this.labelCurrentOperation.Margin = new System.Windows.Forms.Padding(7, 0, 3, 0);
             this.labelCurrentOperation.Name = "labelCurrentOperation";
             this.labelCurrentOperation.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.labelCurrentOperation.Size = new System.Drawing.Size(467, 32);
+            this.labelCurrentOperation.Size = new System.Drawing.Size(463, 32);
             this.labelCurrentOperation.TabIndex = 5;
+            // 
+            // backgroundWorkerSearch
+            // 
+            this.backgroundWorkerSearch.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSearch_DoWork);
+            this.backgroundWorkerSearch.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerSearch_ProgressChanged);
+            this.backgroundWorkerSearch.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerSearch_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -346,6 +355,7 @@
         private System.Windows.Forms.TextBox textQuery;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Label labelCurrentOperation;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerSearch;
     }
 }
 

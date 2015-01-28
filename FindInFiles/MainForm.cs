@@ -98,35 +98,9 @@ namespace FindInFiles {
         /// Handles button click to execute the search routine.
         /// </summary>
         private void buttonRun_Click( object sender, EventArgs e ) {
-
-            if ( SearchHelper.searchIsRunning ) {
-                SearchHelper.searchIsRunning = false;
-                buttonRun.Text = "&Search";
-                return;
-            }
-
-            SearchHelper.searchIsRunning = true;
-            buttonRun.Text = "&Stop";
-
-            List<string> files = SearchHelper
-                .searchDirectories( textPath.Text, new List<string>() { ".java" } );
-
+            labelStatus.Text = "Searching";
             listMatches.Items.Clear();
-
-            if ( files == null || files.Count() < 1 ) {
-                MessageBox.Show( "No files" );
-                return;
-            }
-
-            List<FileMatch> matches = SearchHelper.searchFiles( files, textQuery.Text );
-            if ( matches == null || matches.Count() < 1 ) {
-                MessageBox.Show( "No matches" );
-                return;
-            }
-
-            this.matches = matches;
-            populateList();
-
+            backgroundWorkerSearch.RunWorkerAsync();
         }
 
         /// <summary>
@@ -226,6 +200,7 @@ namespace FindInFiles {
             }
         }
 
+        #region Menu Event Handlers
         /// <summary>
         /// Show the settings dialog when the menu is clicked.
         /// </summary>
@@ -280,6 +255,7 @@ namespace FindInFiles {
             populateList();
 
         }
+        #endregion
 
         /// <summary>
         /// Captures the window closing event and saves any relevant settings before exiting.
@@ -309,6 +285,54 @@ namespace FindInFiles {
                 SettingsHelper.KEY_WINDOW_POS_Y,
                 this.Location.Y
             );
+
+        }
+
+        /// <summary>
+        /// Allows the search to run in a background task
+        /// so we don't lock the main UI thread
+        /// </summary>
+        private void backgroundWorkerSearch_DoWork( object sender, DoWorkEventArgs e ) {
+
+            List<string> files = SearchHelper
+                .searchDirectories( textPath.Text, new List<string>() { ".java" } );
+
+            if ( files == null || files.Count() < 1 ) {
+                MessageBox.Show( "No files" );
+                return;
+            }
+
+            List<FileMatch> matches = e.Argument as List<FileMatch>;
+            matches = SearchHelper.searchFiles( files, textQuery.Text );
+
+            e.Result = matches;
+
+        }
+
+        /// <summary>
+        /// @todo
+        /// </summary>
+        private void backgroundWorkerSearch_ProgressChanged( object sender, ProgressChangedEventArgs e ) {
+
+        }
+
+        /// <summary>
+        /// Event that is fired when background search is complete
+        /// </summary>
+        private void backgroundWorkerSearch_RunWorkerCompleted( object sender, RunWorkerCompletedEventArgs e ) {
+
+            List<FileMatch> matches = (List<FileMatch>) e.Result;
+
+            if ( matches == null || matches.Count() < 1 ) {
+                MessageBox.Show( "No matches" );
+                return;
+            }
+
+            this.matches = matches;
+
+            labelStatus.Text = "Ready";
+
+            populateList();
 
         }
 
