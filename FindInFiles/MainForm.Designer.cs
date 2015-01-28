@@ -23,7 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.contextMenuListMatches = new System.Windows.Forms.ContextMenuStrip();
+            this.components = new System.ComponentModel.Container();
+            this.contextMenuListMatches = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuListMatchesOpenAS = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuListMatchesOpenSecondary = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,6 +47,8 @@
             this.buttonRun = new System.Windows.Forms.Button();
             this.textPath = new System.Windows.Forms.TextBox();
             this.textQuery = new System.Windows.Forms.TextBox();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelCurrentOperation = new System.Windows.Forms.Label();
             this.contextMenuListMatches.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -158,10 +161,10 @@
             // 
             this.panelBody.Controls.Add(this.listMatches);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 76);
+            this.panelBody.Location = new System.Drawing.Point(0, 108);
             this.panelBody.Name = "panelBody";
             this.panelBody.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-            this.panelBody.Size = new System.Drawing.Size(855, 648);
+            this.panelBody.Size = new System.Drawing.Size(855, 616);
             this.panelBody.TabIndex = 7;
             // 
             // listMatches
@@ -179,7 +182,7 @@
             this.listMatches.Location = new System.Drawing.Point(10, 0);
             this.listMatches.MultiSelect = false;
             this.listMatches.Name = "listMatches";
-            this.listMatches.Size = new System.Drawing.Size(835, 638);
+            this.listMatches.Size = new System.Drawing.Size(835, 606);
             this.listMatches.TabIndex = 3;
             this.listMatches.UseCompatibleStateImageBehavior = false;
             this.listMatches.View = System.Windows.Forms.View.Details;
@@ -204,19 +207,21 @@
             // 
             this.tableLayoutMain.AutoSize = true;
             this.tableLayoutMain.ColumnCount = 3;
-            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.5614F));
-            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.32164F));
-            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.59016F));
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.38642F));
+            this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.02342F));
             this.tableLayoutMain.Controls.Add(this.buttonRun, 0, 0);
             this.tableLayoutMain.Controls.Add(this.textPath, 0, 0);
             this.tableLayoutMain.Controls.Add(this.textQuery, 0, 0);
+            this.tableLayoutMain.Controls.Add(this.labelStatus, 0, 1);
+            this.tableLayoutMain.Controls.Add(this.labelCurrentOperation, 1, 1);
             this.tableLayoutMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutMain.Location = new System.Drawing.Point(0, 28);
             this.tableLayoutMain.Name = "tableLayoutMain";
-            this.tableLayoutMain.RowCount = 1;
-            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutMain.Size = new System.Drawing.Size(855, 48);
+            this.tableLayoutMain.RowCount = 2;
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutMain.Size = new System.Drawing.Size(855, 80);
             this.tableLayoutMain.TabIndex = 9;
             // 
             // buttonRun
@@ -261,6 +266,32 @@
             this.textQuery.Size = new System.Drawing.Size(190, 27);
             this.textQuery.TabIndex = 1;
             this.textQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuery_KeyDown);
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.BackColor = System.Drawing.Color.Transparent;
+            this.labelStatus.Location = new System.Drawing.Point(3, 48);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.labelStatus.Size = new System.Drawing.Size(204, 32);
+            this.labelStatus.TabIndex = 4;
+            this.labelStatus.Text = "Ready";
+            // 
+            // labelCurrentOperation
+            // 
+            this.labelCurrentOperation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCurrentOperation.AutoSize = true;
+            this.labelCurrentOperation.Location = new System.Drawing.Point(213, 48);
+            this.labelCurrentOperation.Name = "labelCurrentOperation";
+            this.labelCurrentOperation.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.labelCurrentOperation.Size = new System.Drawing.Size(467, 32);
+            this.labelCurrentOperation.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -313,6 +344,8 @@
         private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.TextBox textPath;
         private System.Windows.Forms.TextBox textQuery;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelCurrentOperation;
     }
 }
 

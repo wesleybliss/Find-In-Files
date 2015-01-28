@@ -79,10 +79,15 @@ namespace FindInFiles {
                 SettingsHelper.DEFAULT_REMEMBER_LAST_QUERY
             );
             if ( showLastQuery ) {
+                // Set the last query text
                 textQuery.Text = settingsHelper.getSettingDefault(
                     SettingsHelper.KEY_LAST_QUERY,
                     SettingsHelper.DEFAULT_LAST_QUERY
                 );
+                // Automatically run the search
+                if ( !String.IsNullOrWhiteSpace( textQuery.Text ) ) {
+                    buttonRun_Click( null, null );
+                }
             }
 
             this.ActiveControl = textQuery;
@@ -93,6 +98,15 @@ namespace FindInFiles {
         /// Handles button click to execute the search routine.
         /// </summary>
         private void buttonRun_Click( object sender, EventArgs e ) {
+
+            if ( SearchHelper.searchIsRunning ) {
+                SearchHelper.searchIsRunning = false;
+                buttonRun.Text = "&Search";
+                return;
+            }
+
+            SearchHelper.searchIsRunning = true;
+            buttonRun.Text = "&Stop";
 
             List<string> files = SearchHelper
                 .searchDirectories( textPath.Text, new List<string>() { ".java" } );

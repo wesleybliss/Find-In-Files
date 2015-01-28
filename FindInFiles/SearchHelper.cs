@@ -10,6 +10,7 @@ namespace FindInFiles {
 
     class SearchHelper {
 
+        public static bool searchIsRunning = false;
         private static SettingsHelper settingsHelper = new SettingsHelper();
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace FindInFiles {
         public static List<FileMatch> searchFiles( List<string> files, string query ) {
             List<FileMatch> matches = new List<FileMatch>();
             foreach ( string file in files ) {
+                if ( !searchIsRunning ) break;
                 List<FileMatch> fms = searchFile( file, query );
                 if ( fms != null ) {
                     foreach ( FileMatch fm in fms ) {
