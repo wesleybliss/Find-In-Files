@@ -229,7 +229,7 @@
             this.buttonRun.Margin = new System.Windows.Forms.Padding(10);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(152, 28);
-            this.buttonRun.TabIndex = 4;
+            this.buttonRun.TabIndex = 3;
             this.buttonRun.Text = "Search";
             this.buttonRun.UseVisualStyleBackColor = true;
             this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
@@ -246,7 +246,7 @@
             this.textPath.Margin = new System.Windows.Forms.Padding(10);
             this.textPath.Name = "textPath";
             this.textPath.Size = new System.Drawing.Size(453, 27);
-            this.textPath.TabIndex = 3;
+            this.textPath.TabIndex = 2;
             this.textPath.Text = "C:\\Users\\wes\\AndroidStudioProjects\\jackthreads-android\\src";
             // 
             // textQuery
@@ -259,7 +259,7 @@
             this.textQuery.Margin = new System.Windows.Forms.Padding(10);
             this.textQuery.Name = "textQuery";
             this.textQuery.Size = new System.Drawing.Size(190, 27);
-            this.textQuery.TabIndex = 2;
+            this.textQuery.TabIndex = 1;
             this.textQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textQuery_KeyDown);
             // 
             // MainForm
