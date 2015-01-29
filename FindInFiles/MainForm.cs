@@ -205,6 +205,16 @@ namespace FindInFiles {
         }
 
         /// <summary>
+        /// Triggers the double-click action if an item is selected and the key is Enter.
+        /// </summary>
+        private void listMatches_KeyUp( object sender, KeyEventArgs e ) {
+            if ( e.KeyCode.Equals( Keys.Enter ) && listMatches.SelectedIndices.Count > 0 ) {
+                e.Handled = true;
+                listMatches_DoubleClick( null, null );
+            }
+        }
+
+        /// <summary>
         /// Gets a full file path from a path & filename, accounting for trailing slashes in the path.
         /// </summary>
         /// <param name="path">Path without filename</param>
@@ -323,6 +333,14 @@ namespace FindInFiles {
             if ( e.KeyCode.Equals( Keys.Enter ) ) {
                 e.Handled = true;
                 buttonRun_Click( null, null );
+            }
+            else if ( e.KeyCode.Equals( Keys.Down ) ) {
+                e.Handled = true;
+                if ( listMatches.Items.Count > 0 ) {
+                    listMatches.SelectedIndices.Clear();
+                    listMatches.SelectedIndices.Add( 0 );
+                    this.ActiveControl = listMatches;
+                }
             }
         }
 
@@ -462,7 +480,6 @@ namespace FindInFiles {
             populateList();
 
         }
-
 
     } // class
 

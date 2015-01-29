@@ -190,6 +190,7 @@
             this.listMatches.UseCompatibleStateImageBehavior = false;
             this.listMatches.View = System.Windows.Forms.View.Details;
             this.listMatches.DoubleClick += new System.EventHandler(this.listMatches_DoubleClick);
+            this.listMatches.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listMatches_KeyUp);
             // 
             // columnHeader1
             // 
