@@ -24,7 +24,7 @@ namespace FindInFiles {
     public partial class MainForm : Form {
 
         // @todo Move these to settings dialog
-        public static readonly string ANDROID_STUDIO_TITLE = "*Android Studio*";
+        public static readonly string ANDROID_STUDIO_TITLE = "Android Studio";
         public static readonly string ANDROID_STUDIO_EXECUTABLE =
             @"C:\Program Files\Android\Android Studio\bin\studio64.exe";
 
@@ -143,16 +143,6 @@ namespace FindInFiles {
         /// </summary>
         private void populateList() {
 
-            //foreach ( FileMatch match in matches ) {
-            //    listMatches.Items.Add(
-            //        getNewListItem(
-            //            match.getName(),
-            //            match.getLine().ToString(),
-            //            match.getSample()
-            //        )
-            //    );
-            //}
-
             foreach ( KeyValuePair<string, List<FileMatch>> group in groupedMatches ) {
 
                 // Start by assuming this is a new group
@@ -202,11 +192,6 @@ namespace FindInFiles {
                     return;
                 }
 
-                Process.Start(
-                    ANDROID_STUDIO_EXECUTABLE, 
-                    match.getPath()
-                );
-
                 activateWindow( ANDROID_STUDIO_TITLE );
 
             }
@@ -220,9 +205,12 @@ namespace FindInFiles {
         /// </summary>
         /// <param name="title">A partial title query to find the window.</param>
         private void activateWindow( string title ) {
-            var prc = Process.GetProcessesByName( title );
-            if ( prc.Any() ) {
-                SetForegroundWindow( prc.First().MainWindowHandle );
+            Process[] processList = Process.GetProcesses();
+            foreach ( Process proc in processList ) {
+                Debug.WriteLine( proc.MainWindowTitle );
+                if ( proc.MainWindowTitle.Contains( title ) ) {
+                    SetForegroundWindow( proc.MainWindowHandle );
+                }
             }
         }
 
