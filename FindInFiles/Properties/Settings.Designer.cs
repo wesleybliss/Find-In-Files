@@ -106,5 +106,17 @@ namespace FindInFiles.Properties {
                 this["RememberLastQuery"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AndroidProjectsDirectory {
+            get {
+                return ((string)(this["AndroidProjectsDirectory"]));
+            }
+            set {
+                this["AndroidProjectsDirectory"] = value;
+            }
+        }
     }
 }

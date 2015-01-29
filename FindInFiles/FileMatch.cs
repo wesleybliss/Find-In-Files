@@ -9,12 +9,12 @@ namespace FindInFiles {
     class FileMatch {
 
         private string name;
-        private long line;
-        private long offset;
+        private int line;
+        private int offset;
         private string path;
         private string sample;
 
-        public FileMatch( string name, long line, long offset, string path, string sample ) {
+        public FileMatch( string name, int line, int offset, string path, string sample ) {
             this.name = name;
             this.line = line;
             this.offset = offset;
@@ -22,14 +22,14 @@ namespace FindInFiles {
             this.sample = sample;
         }
 
-        public FileMatch( string path, long offset ) : this(
+        public FileMatch( string path, int offset ) : this(
             path.Substring( path.LastIndexOf( "\\" ) + 1 ),
             -1, offset, path, null
         ) {}
 
         public string getName() { return name; }
-        public long getLine() { return line; }
-        public long getOffset() { return offset; }
+        public int getLine() { return line; }
+        public int getOffset() { return offset; }
         public string getPath() { return path; }
         public string getSample() { return sample; }
 

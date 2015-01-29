@@ -146,6 +146,7 @@
             this.menuFileSettings.Name = "menuFileSettings";
             this.menuFileSettings.Size = new System.Drawing.Size(130, 24);
             this.menuFileSettings.Text = "&Settings";
+            this.menuFileSettings.Click += new System.EventHandler(this.menuFileSettings_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -157,6 +158,7 @@
             this.menuFileExit.Name = "menuFileExit";
             this.menuFileExit.Size = new System.Drawing.Size(130, 24);
             this.menuFileExit.Text = "E&xit";
+            this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
             // 
             // panelBody
             // 

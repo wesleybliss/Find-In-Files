@@ -20,9 +20,30 @@ namespace FindInFiles {
         }
 
         private void SettingsForm_Load( object sender, EventArgs e ) {
+
             textSnippetSize.Text = settingsHelper.getSettingDefault(
                 SettingsHelper.KEY_SNIPPET_LENGTH, 10
             ).ToString();
+
+            checkRememberLastQuery.Checked = settingsHelper.getSettingDefault(
+                SettingsHelper.KEY_REMEMBER_LAST_QUERY, true
+            );
+
+            textAndroidProjectsDir.Text = settingsHelper.getSettingDefault(
+                SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY, ""
+            );
+
+        }
+
+        private void buttonBrowsetextAndroidProjectsDir_Click( object sender, EventArgs e ) {
+            
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.ShowDialog( this );
+
+            if ( !String.IsNullOrWhiteSpace( fbd.SelectedPath ) ) {
+                textAndroidProjectsDir.Text = fbd.SelectedPath;
+            }
+
         }
 
         private void buttonSave_Click( object sender, EventArgs e ) {
@@ -37,9 +58,16 @@ namespace FindInFiles {
                 checkRememberLastQuery.Checked
             );
 
+            settingsHelper.setSettingDefault(
+                SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY,
+                textAndroidProjectsDir.Text
+            );
+
             this.Close();
 
         }
+
+        
 
     }
 

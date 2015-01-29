@@ -65,7 +65,7 @@ namespace FindInFiles {
                 if ( line.ToLower().Contains( query ) ) {
 
                     localMatches.Add( new FileMatch(
-                        Path.GetFileNameWithoutExtension( file ),
+                        Path.GetFileName( file ),
                         lineIndex, line.IndexOf( query ), file,
                         getLineSample( line, query )
                     ) );

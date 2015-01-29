@@ -19,6 +19,7 @@ namespace FindInFiles {
         public static string KEY_WINDOW_POS_Y = "WindowPosY";
         public static string KEY_LAST_QUERY = "LastQuery";
         public static string KEY_REMEMBER_LAST_QUERY = "RememberLastQuery";
+        public static string KEY_ANDROID_PROJECTS_DIRECTORY = "AndroidProjectsDirectory";
 
         // Default values for some settings
         public static int DEFAULT_SNIPPET_LENGTH = 10;
@@ -28,6 +29,7 @@ namespace FindInFiles {
         public static int DEFAULT_WINDOW_POS_Y = 20;
         public static string DEFAULT_LAST_QUERY = "";
         public static bool DEFAULT_REMEMBER_LAST_QUERY = true;
+        public static string DEFAULT_ANDROID_PROJECTS_DIRECTORY = "";
 
         public bool setSettingDefault( string key, int value ) {
             try {
