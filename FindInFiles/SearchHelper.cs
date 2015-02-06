@@ -91,7 +91,7 @@ namespace FindInFiles {
         /// <param name="query"></param>
         /// <returns></returns>
         public static string getLineSample( string line, string query ) {
-            int snippetLength = settingsHelper.getSettingDefault(
+            int snippetLength = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_SNIPPET_LENGTH, 10
             );
 

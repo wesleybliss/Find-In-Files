@@ -12,24 +12,21 @@ namespace FindInFiles {
 
     public partial class SettingsForm : Form {
 
-        private SettingsHelper settingsHelper;
-
         public SettingsForm() {
             InitializeComponent();
-            settingsHelper = new SettingsHelper();
         }
 
         private void SettingsForm_Load( object sender, EventArgs e ) {
 
-            textSnippetSize.Text = settingsHelper.getSettingDefault(
+            textSnippetSize.Text = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_SNIPPET_LENGTH, 10
             ).ToString();
 
-            checkRememberLastQuery.Checked = settingsHelper.getSettingDefault(
+            checkRememberLastQuery.Checked = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_REMEMBER_LAST_QUERY, true
             );
 
-            textAndroidProjectsDir.Text = settingsHelper.getSettingDefault(
+            textAndroidProjectsDir.Text = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY, ""
             );
 
@@ -48,17 +45,17 @@ namespace FindInFiles {
 
         private void buttonSave_Click( object sender, EventArgs e ) {
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_SNIPPET_LENGTH,
                 Int32.Parse( textSnippetSize.Text )
             );
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_REMEMBER_LAST_QUERY,
                 checkRememberLastQuery.Checked
             );
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY,
                 textAndroidProjectsDir.Text
             );

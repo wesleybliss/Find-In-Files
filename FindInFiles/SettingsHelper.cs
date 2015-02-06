@@ -31,7 +31,7 @@ namespace FindInFiles {
         public static bool DEFAULT_REMEMBER_LAST_QUERY = true;
         public static string DEFAULT_ANDROID_PROJECTS_DIRECTORY = "";
 
-        public bool setSettingDefault( string key, int value ) {
+        public static bool setSettingDefault( string key, int value ) {
             try {
                 Settings.Default[key] = value;
                 Settings.Default.Save();
@@ -40,7 +40,7 @@ namespace FindInFiles {
             catch { return false; }
         }
 
-        public bool setSettingDefault( string key, string value ) {
+        public static bool setSettingDefault( string key, string value ) {
             try {
                 Settings.Default[key] = value;
                 Settings.Default.Save();
@@ -49,7 +49,7 @@ namespace FindInFiles {
             catch { return false; }
         }
 
-        public bool setSettingDefault( string key, bool value ) {
+        public static bool setSettingDefault( string key, bool value ) {
             try {
                 Settings.Default[key] = value;
                 Settings.Default.Save();
@@ -58,17 +58,17 @@ namespace FindInFiles {
             catch { return false; }
         }
 
-        public int getSettingDefault( string key, int fallback = 0 ) {
+        public static int getSettingDefault( string key, int fallback = 0 ) {
             try { return (int) Settings.Default[key]; }
             catch { return (int) fallback; }
         }
 
-        public string getSettingDefault( string key, string fallback = "" ) {
+        public static string getSettingDefault( string key, string fallback = "" ) {
             try { return (string) Settings.Default[key]; }
             catch { return (string) fallback; }
         }
 
-        public bool getSettingDefault( string key, bool fallback = false ) {
+        public static bool getSettingDefault( string key, bool fallback = false ) {
             try { return (bool) Settings.Default[key]; }
             catch { return (bool) fallback; }
         }

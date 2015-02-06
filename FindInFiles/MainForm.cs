@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using FindInFiles.Utils;
 
 /*
  * @todo
@@ -23,23 +24,12 @@ namespace FindInFiles {
 
     public partial class MainForm : Form {
 
-        // @todo Move these to settings dialog
-        public static readonly string ANDROID_STUDIO_TITLE = "Android Studio";
-        public static readonly string ANDROID_STUDIO_EXECUTABLE =
-            @"C:\Program Files\Android\Android Studio\bin\studio64.exe";
-
-        [DllImport( "user32.dll" )]
-        private static extern bool SetForegroundWindow( IntPtr hWnd );
-
-        private SettingsHelper settingsHelper;
-
         private List<FileMatch> matches;
         private Dictionary<string, List<FileMatch>> groupedMatches;
 
 
         public MainForm() {
             InitializeComponent();
-            settingsHelper = new SettingsHelper();
         }
 
         /// <summary>
@@ -49,12 +39,12 @@ namespace FindInFiles {
 
             // Set window size based on memory, if available
 
-            int windowWidth = settingsHelper.getSettingDefault(
+            int windowWidth = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_WINDOW_WIDTH,
                 SettingsHelper.DEFAULT_WINDOW_WIDTH
             );
 
-            int windowHeight = settingsHelper.getSettingDefault(
+            int windowHeight = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_WINDOW_HEIGHT,
                 SettingsHelper.DEFAULT_WINDOW_HEIGHT
             );
@@ -63,12 +53,12 @@ namespace FindInFiles {
 
             // Set window location based on memory, if available
 
-            int windowPosX = settingsHelper.getSettingDefault(
+            int windowPosX = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_WINDOW_POS_X,
                 SettingsHelper.DEFAULT_WINDOW_POS_X
             );
 
-            int windowPosY = settingsHelper.getSettingDefault(
+            int windowPosY = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_WINDOW_POS_Y,
                 SettingsHelper.DEFAULT_WINDOW_POS_Y
             );
@@ -76,13 +66,13 @@ namespace FindInFiles {
             this.Location = new Point( windowPosX, windowPosY );
 
             // Set last query, if available
-            bool showLastQuery = settingsHelper.getSettingDefault(
+            bool showLastQuery = SettingsHelper.getSettingDefault(
                 SettingsHelper.KEY_REMEMBER_LAST_QUERY,
                 SettingsHelper.DEFAULT_REMEMBER_LAST_QUERY
             );
             if ( showLastQuery ) {
                 // Set the last query text
-                textQuery.Text = settingsHelper.getSettingDefault(
+                textQuery.Text = SettingsHelper.getSettingDefault(
                     SettingsHelper.KEY_LAST_QUERY,
                     SettingsHelper.DEFAULT_LAST_QUERY
                 );
@@ -192,13 +182,13 @@ namespace FindInFiles {
                     return;
                 }
 
-                openFileIntelliJ(
+                IOHelper.openFileIntelliJ(
                     Path.GetDirectoryName( match.getPath() ), 
                     match.getName(),
                     match.getLine()
                 );
 
-                activateWindow( ANDROID_STUDIO_TITLE );
+                IOHelper.activateWindow( IOHelper.ANDROID_STUDIO_TITLE );
 
             }
 
@@ -211,118 +201,6 @@ namespace FindInFiles {
             if ( e.KeyCode.Equals( Keys.Enter ) && listMatches.SelectedIndices.Count > 0 ) {
                 e.Handled = true;
                 listMatches_DoubleClick( null, null );
-            }
-        }
-
-        /// <summary>
-        /// Gets a full file path from a path & filename, accounting for trailing slashes in the path.
-        /// </summary>
-        /// <param name="path">Path without filename</param>
-        /// <param name="filename">Filename without path</param>
-        /// <returns>Concatenated path + filename, with proper trailing slash in path.</returns>
-        private string getFullFilePath( string path, string filename ) {
-            path = path.EndsWith( "\\" ) ? path : ( path + "\\" );
-            return ( path + filename );
-        }
-
-        private string getAndroidProjectPath( string path ) {
-
-            string androidProjectsPath = settingsHelper.getSettingDefault(
-                SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY, ""
-            );
-
-            // Make sure path is in Android projects directory
-            if ( !path.ToUpper().StartsWith( androidProjectsPath.ToUpper() ) ) {
-                return null;
-            }
-
-            // Remove projects directory
-            path = path.Substring( androidProjectsPath.Length );
-
-            // Remove leading space
-            if ( path.StartsWith( "\\" ) ) {
-                path = path.Substring( 1 );
-            }
-
-            // We should now have project dir + trailing dirs, e.g.
-            // myproject\src\foo\bar\possibly_file_name.java
-
-            // Edge case. Original path would have to be something like
-            // \path\to\projects\myproject
-            // in which case, we just return "myproject"
-            if ( path.Contains( "\\" ) ) {
-                // Grab just the first part of the directory, e.g.
-                // myproject - from myproject\src\foo\etc.
-                path = path.Substring( 0, path.IndexOf( "\\" ) );
-            }
-
-            return ( androidProjectsPath + "\\" + path );
-
-        }
-
-        /// <summary>
-        /// Opens a file in an external application.
-        /// </summary>
-        /// <param name="executable">Path to app executable</param>
-        /// <param name="path">Path of the file to open (without filename)</param>
-        /// <param name="filename">Filename of file to open</param>
-        /// <param name="preArgs">Arguments that come before the path</param>
-        /// <param name="postArgs">Arguments that come after the filename</param>
-        private void openFileExternal( string executable, string path, string filename, string preArgs, string postArgs ) {
-
-            preArgs = ( String.IsNullOrWhiteSpace( preArgs ) ) ? "" : ( preArgs + " " );
-            postArgs = ( String.IsNullOrWhiteSpace( postArgs ) ) ? "" : ( "" + postArgs );
-
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = executable;
-            psi.Arguments = preArgs + "\"" + getFullFilePath( path, filename ) + "\"" + postArgs;
-
-            Process.Start( psi );
-
-        }
-
-        /// <summary>
-        /// Opens a file in Intellij, reusing an open editor if one exists with the same project path.
-        /// </summary>
-        /// <param name="path">Path to file (without filename)</param>
-        /// <param name="filename">Filename of file to open</param>
-        /// <param name="lineNumber">Optional line number to jump to</param>
-        private void openFileIntelliJ( string path, string filename, int lineNumber ) {
-
-            string androidProjectsPath = settingsHelper.getSettingDefault(
-                SettingsHelper.KEY_ANDROID_PROJECTS_DIRECTORY, ""
-            );
-
-            if ( String.IsNullOrWhiteSpace( androidProjectsPath ) ) {
-                return;
-            }
-
-            string line = ( lineNumber < 1 ) ?
-                "" : ( " --line " + lineNumber.ToString() );
-
-            openFileExternal(
-                ANDROID_STUDIO_EXECUTABLE,
-                path,
-                filename,
-                "\"" + getAndroidProjectPath( path ) + "\"" + line,
-                ""
-            );
-
-        }
-
-        /// <summary>
-        /// Activates a window by it's title.
-        /// 
-        /// @todo Note this isn't really working with AS yet, not sure why.
-        /// </summary>
-        /// <param name="title">A partial title query to find the window.</param>
-        private void activateWindow( string title ) {
-            Process[] processList = Process.GetProcesses();
-            foreach ( Process proc in processList ) {
-                Debug.WriteLine( proc.MainWindowTitle );
-                if ( proc.MainWindowTitle.Contains( title ) ) {
-                    SetForegroundWindow( proc.MainWindowHandle );
-                }
             }
         }
 
@@ -408,24 +286,24 @@ namespace FindInFiles {
 
             // Save window size
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_WINDOW_WIDTH,
                 this.Size.Width
             );
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_WINDOW_HEIGHT,
                 this.Size.Height
             );
 
             // Save window location
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_WINDOW_POS_X,
                 this.Location.X
             );
 
-            settingsHelper.setSettingDefault(
+            SettingsHelper.setSettingDefault(
                 SettingsHelper.KEY_WINDOW_POS_Y,
                 this.Location.Y
             );
